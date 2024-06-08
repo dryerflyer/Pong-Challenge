@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://fric7de1j8a3"]
+
+[ext_resource type="PackedScene" uid="uid://engoxaltxilr" path="res://goal.tscn" id="1_h87rk"]
+[ext_resource type="Script" path="res://game.gd" id="1_jo5eh"]
+[ext_resource type="PackedScene" uid="uid://cdsi3wmyoohy4" path="res://wall.tscn" id="1_ljkqn"]
+[ext_resource type="PackedScene" uid="uid://buqyiyw316so5" path="res://paddle.tscn" id="2_dfijs"]
+[ext_resource type="PackedScene" uid="uid://c1bjfly1jotgv" path="res://ball.tscn" id="3_8ujjp"]
+
+[sub_resource type="SystemFont" id="SystemFont_dwbnl"]
+font_names = PackedStringArray("Berkshire Swash")
+
+[sub_resource type="LabelSettings" id="LabelSettings_e8d62"]
+font = SubResource("SystemFont_dwbnl")
+font_size = 44
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_jo5eh")
+
+[node name="Goal" parent="." instance=ExtResource("1_h87rk")]
+position = Vector2(-10, 540)
+side = "left"
+
+[node name="Goal2" parent="." instance=ExtResource("1_h87rk")]
+position = Vector2(1930, 540)
+side = "right"
+
+[node name="Wall" parent="." instance=ExtResource("1_ljkqn")]
+position = Vector2(960, 16)
+
+[node name="Wall2" parent="." instance=ExtResource("1_ljkqn")]
+position = Vector2(960, 1064)
+
+[node name="Paddle" parent="." instance=ExtResource("2_dfijs")]
+position = Vector2(8, 540)
+side = "left"
+
+[node name="Paddle2" parent="." instance=ExtResource("2_dfijs")]
+position = Vector2(1912, 540)
+side = "right"
+
+[node name="Ball" parent="." instance=ExtResource("3_8ujjp")]
+position = Vector2(960, 540)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 896.0
+offset_top = 40.0
+offset_right = 1024.0
+offset_bottom = 63.0
+size_flags_vertical = 0
+text = "0:0"
+label_settings = SubResource("LabelSettings_e8d62")
+horizontal_alignment = 1
+
+[connection signal="body_shape_entered" from="Goal" to="." method="_on_goal_body_shape_entered"]
+[connection signal="body_shape_entered" from="Goal2" to="." method="_on_goal_2_body_shape_entered"]
